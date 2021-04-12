@@ -1,0 +1,81 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block page_title %}Legiteam | My Card {% endblock %}
+
+{% block breadcrumbs %}
+    {% clear_breadcrumbs %}
+    {% breadcrumb 'Main page' '/' %}
+    {% breadcrumb 'My card' '/card/' %}
+    {% render_breadcrumbs %}
+{% endblock breadcrumbs %}
+
+{% block page_content %}
+    <div class="content-section container-fluid pl-4 mx-3">
+        <div class="row">
+            <div class="container">
+                <div class="row lead">Total items in card: {{ summary.items_count }}</div>
+                <div class="row lead">Total items price: {{ summary.total_price }}</div>
+            </div>
+        </div>
+        <div class="row">
+            {% if products_in_card %}
+                <a class="btn btn-primary" href="{% url 'order_page'%}">Make order</a>
+            {% endif %}
+        </div>
+        {% if products_in_card %}
+            <div class="row mt-2">
+                <table class="table table-bordered text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Price, USD</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total Price</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in products_in_card %}
+                        {# product is an instance of shop.models.ProductInCardInfo #}
+                        <tr>
+                            <td class="center">
+                                <img src="{{ product.image_url }}" alt="Product image" height="50">
+                            </td>
+                            <td>
+                                {{ product.title }}
+                            </td>
+                            <td>
+                                {{ product.size }}
+                            </td>
+                            <td>
+                                {{ product.brand }}
+                            </td>
+                            <td>
+                                {{ product.price }}
+                            </td>
+                            <td>
+                                <a href="{% url 'decrease_q' product.pk %}">-</a>
+                                {{ product.quantity }}
+                                <a href="{% url 'increase_q' product.pk %}">+</a>
+                            </td>
+                            <td>
+                                {{ product.total }}
+                            </td>
+                            <td>
+                                <a href="{% url 'delete_product_from_card' product.pk %}">delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    {% else %}
+        <h3 class="text-center">You haven't added any products in your order yet.</h3>
+    {% endif %}
+    </div>
+{% endblock page_content %}

@@ -1,0 +1,123 @@
+{% extends "base_layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    Legiteam | My orders
+{% endblock page_title %}
+
+{% block page_content %}
+    <div class="content-section col-md-8 mr-1">
+        <div class="container">
+            <h1 class="row">Order#{{ order.id }} details</h1>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <h3>Order info</h3>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <div class="row lead">Order made by: {{ order.user.username }}</div>
+                    <div class="row lead">Order date: {{ order.datetime_posted|date }}</div>
+                    <div class="row lead">
+                        Addressee: {{ order.receiver_first_name }} {{ order.receiver_last_name }}
+                    </div>
+                    <div class="row lead mt-2">
+                        <h5>Shipping info</h5>
+                    </div>
+                    <div class="row lead">Shipping type: {{ order.shipping_type.title }}</div>
+                    <div class="row lead">Shipping address: {{ order.shipping_address }}</div>
+                    <div class="row lead">Shipping date: {{ order.datetime_shipping|date }}</div>
+                    <div class="row lead">Post code: {{ order.post_code }}</div>
+                    <div class="row lead">Phone: {{ order.phone }}</div>
+                    <div class="row lead">
+                    <div class="container">
+                        <div class="row mt-2 py-0">
+                            <h5>
+                                Order status:
+                            </h5>
+                        </div>
+                        <div class="row mb-1 py-0">
+                            <b
+                                    {% if order.status.title == 'Canceled' %}
+                                        class="text-danger"
+                                    {% elif order.status.title == 'Complete' %}
+                                        class="text-success"
+                                    {% else %}
+                                        class="text-info my-0 py-0"
+                                    {% endif %}
+                            >
+                                {{ order.status.title }}
+                            </b>
+                        </div>
+                        {% if order.status.title == 'Waiting for confirmation' %}
+                            <div class="row mb-2">
+                                <a class="btn btn-danger" href="{% url 'cancel-order' order.pk %}">
+                                    Cancel order
+                                </a>
+                            </div>
+                        {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <h3>Order summary</h3>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <div class="row lead">Total items in card: {{ summary.items_count }}</div>
+                    <div class="row lead">Total items price: {{ summary.total_price }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <h3>Products in order</h3>
+            </div>
+            <div class="row mt-2">
+                <table class="table table-bordered text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Price, USD</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in products_in_order %}
+                        {# product is an instance of shop.models.ProductInCardInfo #}
+                        <tr>
+                            <td class="center">
+                                <img src="{{ product.image_url }}" alt="Product image" height="50">
+                            </td>
+                            <td>{{ product.title }}</td>
+                            <td>{{ product.size }}</td>
+                            <td>{{ product.brand }}</td>
+                            <td>{{ product.price }}</td>
+                            <td>{{ product.quantity }}</td>
+                            <td>{{ product.total }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+{% endblock page_content %}
+
+{% block side_section %}
+    <div class="content-section col-md-3 ml-0">
+        <h3>Profile options</h3>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-light">
+                <a href="{% url 'user-profile' %}">My profile</a>
+            </li>
+            <li class="list-group-item list-group-item-light">
+                <a href="{% url 'user-orders' %}">My orders</a>
+            </li>
+        </ul>
+    </div>
+{% endblock side_section %}

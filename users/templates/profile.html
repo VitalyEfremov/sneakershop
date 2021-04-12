@@ -1,0 +1,38 @@
+{% extends "base_layout.html" %}
+{% load crispy_forms_tags %}
+{% block page_content %}
+    <div class="content-section col-md-8 mr-1">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" alt="Profile picture">
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+            </div>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Profile Info</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+{% endblock page_content %}
+
+{% block side_section %}
+    <div class="content-section col-md-3">
+        <h3>Profile options</h3>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-light">
+                <a href="{% url 'user-profile' %}">My profile</a>
+            </li>
+            <li class="list-group-item list-group-item-light">
+                <a href="{% url 'user-orders' %}">My orders</a>
+            </li>
+        </ul>
+    </div>
+{% endblock side_section %}

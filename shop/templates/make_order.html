@@ -1,0 +1,28 @@
+{% extends "base_layout.html" %}
+{% load crispy_forms_tags %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {% clear_breadcrumbs %}
+    {% breadcrumb 'Main page' '/' %}
+    {% breadcrumb 'Card' '/card/' %}
+    {% breadcrumb 'Make order' '/make_order/' %}
+    {% render_breadcrumbs %}
+{% endblock breadcrumbs %}
+
+{% block page_content %}
+    <div class="content-section container-fluid mx-3">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Order Info</legend>
+                {{ order_form|crispy }}
+                <small class="text-muted">Date of delivery in format "2021-04-05"</small>
+                <input type="text" class="d-none" name="status_id" value="1">
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Submit order</button>
+            </div>
+        </form>
+    </div>
+{% endblock page_content %}

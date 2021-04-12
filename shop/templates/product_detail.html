@@ -1,0 +1,54 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block page_title %}Legiteam | {{ product.brand }} {{ product.title }}{% endblock %}
+
+{% block breadcrumbs %}
+    {% clear_breadcrumbs %}
+    {% breadcrumb 'Main page' '/' %}
+    {% breadcrumb 'Catalog' '/catalog' %}
+    {% breadcrumb product.title request.path %}
+    {% render_breadcrumbs %}
+{% endblock breadcrumbs %}
+
+{% block page_content %}
+    <div class="container-fluid">
+        <div class="container px-0 mx-0">
+            <div class="card">
+                <div class="container">
+                    <div class="row pl-1 mt-4">
+                        <div class="col ">
+                            <img class="card-img-left" src="{{ object.image.url }}" alt="Card image cap" height="300">
+                        </div>
+                        <div class="col ">
+                            <h1 class="row col-md-12 ml-0 pl-0">{{ product.title }}</h1>
+                            <div>
+                                <h6 class="lead">Brand: {{ product.brand }}</h6>
+                            </div>
+                            <div class="lead">Size: {{ product.size }}</div>
+                            <div class="lead">Price: {{ product.price }} USD</div>
+                            <div class="mt-2">
+                                <a href="{% url 'add-to-card' product.pk %}">
+                                    <button class="btn btn-primary">
+                                        Add to card
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mx-2 my-2 row">
+                        <div class="container-fluid">
+                            <h4 class="row">Description:</h4>
+                            <div class="row">
+                                <p class="card-text text-left lead">
+                                    {{ product.description }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

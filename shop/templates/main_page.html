@@ -1,0 +1,36 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block page_title %}
+    Legiteam | Main page
+{% endblock page_title %}
+
+{% block banner %}
+    <div class="mx-auto px-auto text-center">
+        <img src="{% static 'images/banner.png' %}" class="img-fluid" style="height: 300px;">
+    </div>
+{% endblock banner %}
+
+{% block page_content %}
+<h1>Latest updates in our shop!</h1>
+<div class="container">
+    {% for product in products %}
+        {% if forloop.counter|divisibleby:4 or forloop.counter == 1 %}
+            <div class="row">
+        {% endif %}
+    <div class="card mb-2 mt-2 ml-1 mr-1" style="width: 18rem;">
+        <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap" height="200">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="{% url 'product-detail' product.pk %}">{{ product.brand }} {{ product.title }}</a>
+            </h5>
+            <p class="card-text">Size: {{ product.size }}</p>
+            <p class="card-text">Price: {{ product.price }}</p>
+        </div>
+    </div>
+    {% if forloop.counter|divisibleby:3 or forloop.last %}
+        </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock page_content %}
