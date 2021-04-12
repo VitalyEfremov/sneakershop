@@ -22,6 +22,7 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class ProfileUpdateForm(forms.ModelForm):
+    birth_date = forms.DateField(widget=forms.SelectDateWidget)
 
     class Meta:
         model = UserProfile

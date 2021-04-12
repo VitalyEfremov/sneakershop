@@ -49,6 +49,16 @@
                             >
                                 {{ order.status.title }}
                             </b>
+
+                        </div>
+                        <div class="row mb-2">
+                            {% if order.status.title == 'Waiting for confirmation' %}
+                                <progress max="100" value="0"></progress>
+                            {% elif order.status.title == 'On the way' %}
+                                <progress max="100" value="50"></progress>
+                            {% elif order.status.title == 'Complete' %}
+                                <progress max="100" value="100"></progress>
+                            {% endif %}
                         </div>
                         {% if order.status.title == 'Waiting for confirmation' %}
                             <div class="row mb-2">
