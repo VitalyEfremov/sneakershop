@@ -1,0 +1,26 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block page_title %}
+    Legiteam | Main page
+{% endblock page_title %}
+
+{% block banner %}
+    <div class="mx-auto px-auto text-center">
+        <img src="{% static 'images/banner.png' %}" class="img-fluid" style="height: 300px;">
+    </div>
+{% endblock banner %}
+
+{% block page_content %}
+    <h1 class="text-center mx-auto">About us</h1>
+    <div class="container">
+        <p class="text-justify lead">
+            We are a group of young people who appreciate quality and authenticity of products we consume.
+            So that we thoroughly check authenticity of sneakers we sell and guaranty the highest quality of them.
+        </p>
+        <p class="text-justify lead">
+            Legiteam is a team of professionals that provides you with legit sneakers 365 days a year!
+            Contact us if you want to join.
+        </p>
+    </div>
+{% endblock page_content %}

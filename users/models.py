@@ -17,16 +17,16 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-        img = Image.open(self.image.path)
-
-        max_size = 300
-        resize_ratio = min(max_size/img.width, max_size/img.height)
-
-        if img.height > max_size or img.width > max_size:
-            output_size = (img.height * resize_ratio, img.width * resize_ratio)
-            img.thumbnail(output_size, Image.ANTIALIAS)
-            img.save(self.image.path, 'JPEG')
+    #
+    # def save(self, *args, **kwargs):
+    #     super().save(*args, **kwargs)
+    #
+    #     img = Image.open(self.image.path)
+    #
+    #     max_size = 300
+    #     resize_ratio = min(max_size/img.width, max_size/img.height)
+    #
+    #     if img.height > max_size or img.width > max_size:
+    #         output_size = (img.height * resize_ratio, img.width * resize_ratio)
+    #         img.thumbnail(output_size, Image.ANTIALIAS)
+    #         img.save(self.image.path, 'JPEG')

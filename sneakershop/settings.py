@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_cleanup',
     'phonenumber_field',
+    'storages',
     'django_bootstrap_breadcrumbs',
     'shop.apps.ShopConfig',
     'users.apps.UsersConfig',
@@ -143,3 +144,14 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = 'tixofc@gmail.com'
 EMAIL_HOST_PASSWORD = 'bkytocilscheejiq'
+
+# AWS S3
+AWS_ACCESS_KEY_ID = 'AKIA2LA2TA4J75YX6JGG'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'sneakershop-aws-bucket'
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_S3_REGION_NAME = "eu-central-1"

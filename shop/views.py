@@ -1,6 +1,5 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView, ListView
@@ -23,6 +22,14 @@ def main_page(request: HttpRequest) -> HttpResponse:
         'main_page_banner': '/media/common/main_page_banner.jpg'
     }
     return render(request, 'main_page.html', context)
+
+
+def about_view(request):
+    return render(request, 'about_page.html')
+
+
+def contacts_view(request):
+    return render(request, 'contacts_page.html')
 
 
 @login_required

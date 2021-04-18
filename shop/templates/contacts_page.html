@@ -1,0 +1,36 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block page_title %}
+    Legiteam | Main page
+{% endblock page_title %}
+
+{% block banner %}
+    <div class="mx-auto px-auto text-center">
+        <img src="{% static 'images/banner.png' %}" class="img-fluid" style="height: 300px;">
+    </div>
+{% endblock banner %}
+
+{% block page_content %}
+    <h1 class="text-center mx-auto mb-4">Contacts</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                <h4>Call us</h4>
+                <p class="lead">8(800)5553535</p>
+            </div>
+            <div class="col-sm text-center">
+                <h4>Vkontakte</h4>
+                <p class="lead">vk.com/legiteam_shop</p>
+            </div>
+            <div class="col-sm text-center">
+                <h4>Email</h4>
+                <p class="lead">help@legiteam.shop</p>
+            </div>
+            <div class="col-sm text-center">
+                <h4>Instagram</h4>
+                <p class="lead">instagram.com/legiteam_shop</p>
+            </div>
+        </div>
+    </div>
+{% endblock page_content %}
