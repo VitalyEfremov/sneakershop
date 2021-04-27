@@ -9,6 +9,7 @@ django-crispy-forms==1.11.2
 django-phonenumber-field==5.0.0
 django-storages==1.11.1
 eventsourcing==1.2.1
+gunicorn==20.1.0
 jmespath==0.10.0
 phonenumberslite==8.12.20
 Pillow==8.2.0
