@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'jt!9p^39is69ll_mv-54uqnd(93*x5@0ipic!(ftpsgx6m1ej5'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG') or True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://legiteamshopdev.herokuapp.com/']
 
 # Application definition
 
@@ -142,13 +142,13 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = 'tixofc@gmail.com'
-EMAIL_HOST_PASSWORD = 'bkytocilscheejiq'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 # AWS S3
-AWS_ACCESS_KEY_ID = 'AKIA2LA2TA4J75YX6JGG'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'sneakershop-aws-bucket'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
